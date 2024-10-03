@@ -1,0 +1,22 @@
+.grid {
+    width: 400px;
+    height: 600px;
+    background-image: url("images/background.png");
+    position: relative;
+    font-size: 100px;
+    text-align: center;
+}
+
+.doodler {
+    width: 66px;
+    height: 92px;
+    background-image: url("images/player.png");
+    position: absolute;
+}
+
+.platform {
+    width: 123px;
+    height: 34px;
+    background-image: url("images/platform.png");
+    position: absolute;
+}
