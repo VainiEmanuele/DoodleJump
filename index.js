@@ -10,7 +10,7 @@ const doodler=document.createElement('div');
 let isGameover=false;
 let score 
 let doodlerLeftSpace=50
-let doodlerBottomSpace=150
+let doodlerBottomSpace=120
 let platformCount=5
 let platforms=[]
 
@@ -41,10 +41,12 @@ function createPlatforms(){
 
 createPlatforms();
 
-function createDoodler(){ 
-    doodler.classList.add('doodler');
+function createDoodler(){    
     grid.appendChild(doodler);
-    doodler.style.bottom=doodlerBottomSpace=doodlerLeftSpace+'px';
+    doodler.classList.add('doodler');
+    doodlerLeftSpace=platforms[0].left;
+    doodler.style.left=doodlerLeftSpace+'px';
+    doodler.style.bottom=doodlerBottomSpace=doodlerBottomSpace+'px';
 }
 
 createDoodler();
