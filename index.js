@@ -8,11 +8,21 @@ const grid=document.querySelector('.grid');
 const doodler=document.createElement('div');
 
 let isGameover=false;
-let score 
+let score =0
 let doodlerLeftSpace=50
 let doodlerBottomSpace=120
 let platformCount=5
 let platforms=[]
+
+let isJumping=true;
+let isGoingLeft=false;
+let isGoingRight=false;
+let leftTImerId
+let rightTimerId
+let upTimerId
+let downTimerId
+const gravity=0.9;
+const speed =3;
 
 class Platform{
     constructor(newPlatBottom){
@@ -49,7 +59,17 @@ function movePlatforms()
             platform.bottom-=4;
             let visual= platform.visual;
             visual.style.bottom=platform.bottom+'px';
-            console.log(platform.bottom);
+           
+
+            if (platform.bottom<10){
+               let firstPlatform=platforms[0].visual;
+               firstPlatform.classList.remove('platform');
+               platforms.shift();               
+               score++;
+
+               let newPlatform= new Platform(600);
+               platforms.push(newPlatform);
+            }
         })
     }
 }
@@ -63,8 +83,33 @@ function createDoodler(){
     console.log(doodlerBottomSpace);
 }
 
+function fall()
+{
+    isJumping=false;
+    clearTimeout(upTimerId);
+    downTimerId=setInterval(function(){
+        doodlerBottomSpace-=.8;
+        doodler.style.bottom=doodlerBottomSpace+'px';
+        if (doodlerBottomSpace<=0)
+        {
+           gameOver();
+        }
+        // console.log(doodlerBottomSpace);
+       
+    });
+}
 
+fall();
 
+function gameOver(){
+      isGameover=true;
+    while (grid.firstChild)
+    {
+        grid.removeChild(grid.firstChild);
+    }
+    grid.innerHTML=score
+    clearInterval(downTimerId);
+}
 
 function start()
 {
