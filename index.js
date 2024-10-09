@@ -39,16 +39,46 @@ function createPlatforms(){
         console.log(platforms);
 }
 
-createPlatforms();
+
+
+function movePlatforms()
+{    
+    if (doodlerBottomSpace>100)
+    {
+        platforms.forEach(platform=>{
+            platform.bottom-=4;
+            let visual= platform.visual;
+            visual.style.bottom=platform.bottom+'px';
+            console.log(platform.bottom);
+        })
+    }
+}
 
 function createDoodler(){    
     grid.appendChild(doodler);
     doodler.classList.add('doodler');
     doodlerLeftSpace=platforms[0].left;
     doodler.style.left=doodlerLeftSpace+'px';
-    doodler.style.bottom=doodlerBottomSpace=doodlerBottomSpace+'px';
+    doodler.style.bottom=doodlerBottomSpace+'px';
+    console.log(doodlerBottomSpace);
 }
 
-createDoodler();
+
+
+
+function start()
+{
+    if (!isGameover )
+        { 
+            createPlatforms();
+            createDoodler();
+            setInterval(movePlatforms,30);
+           
+        }
+}
+
+start();
+
+
 }
 )
